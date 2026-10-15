@@ -7,6 +7,11 @@ MERN stack app for managing employees, assigning tasks to them and tracking work
 
 All business rules are enforced in the backend. The frontend repeats the basic field validation only to give quicker feedback.
 
+## Live demo
+
+- **Frontend:** https://assignmentf.vercel.app
+- **Backend API:** https://assignment-delta-ecru.vercel.app/api (e.g. [`/api/dashboard`](https://assignment-delta-ecru.vercel.app/api/dashboard), [`/api/health`](https://assignment-delta-ecru.vercel.app/api/health))
+
 ## Project structure
 
 ```
