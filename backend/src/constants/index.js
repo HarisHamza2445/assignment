@@ -1,0 +1,53 @@
+const DEPARTMENTS = ['Development', 'Design', 'QA', 'HR', 'Sales'];
+
+const EMPLOYEE_STATUS = {
+  ACTIVE: 'Active',
+  INACTIVE: 'Inactive',
+  ON_LEAVE: 'On Leave',
+};
+
+const TASK_STATUS = {
+  TODO: 'Todo',
+  IN_PROGRESS: 'In Progress',
+  COMPLETED: 'Completed',
+  CANCELLED: 'Cancelled',
+};
+
+const PRIORITIES = ['Low', 'Medium', 'High', 'Critical'];
+
+// used for "sort by priority" so Critical > High > Medium > Low
+const PRIORITY_RANK = {
+  Low: 1,
+  Medium: 2,
+  High: 3,
+  Critical: 4,
+};
+
+const STATUS_TRANSITIONS = {
+  [TASK_STATUS.TODO]: [TASK_STATUS.IN_PROGRESS, TASK_STATUS.CANCELLED],
+  [TASK_STATUS.IN_PROGRESS]: [TASK_STATUS.COMPLETED, TASK_STATUS.CANCELLED],
+  [TASK_STATUS.COMPLETED]: [],
+  [TASK_STATUS.CANCELLED]: [],
+};
+
+const ACTIVE_TASK_STATUSES = [TASK_STATUS.TODO, TASK_STATUS.IN_PROGRESS];
+const CLOSED_TASK_STATUSES = [TASK_STATUS.COMPLETED, TASK_STATUS.CANCELLED];
+
+const MAX_ACTIVE_TASKS = 3;
+
+const DEFAULT_PAGE_SIZE = 10;
+const MAX_PAGE_SIZE = 100;
+
+module.exports = {
+  DEPARTMENTS,
+  EMPLOYEE_STATUS,
+  TASK_STATUS,
+  PRIORITIES,
+  PRIORITY_RANK,
+  STATUS_TRANSITIONS,
+  ACTIVE_TASK_STATUSES,
+  CLOSED_TASK_STATUSES,
+  MAX_ACTIVE_TASKS,
+  DEFAULT_PAGE_SIZE,
+  MAX_PAGE_SIZE,
+};
