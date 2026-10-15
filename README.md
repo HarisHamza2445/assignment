@@ -22,7 +22,8 @@ backend/
     routes/
     middlewares/         404 + error handler
     utils/               dates, pagination, csv, ApiError
-    app.js / server.js
+    app.js / server.js   server.js is used locally / on Render
+  api/index.js           Vercel serverless entry
 frontend/
   src/
     api/                 axios client + one file per resource
@@ -79,8 +80,19 @@ npm run dev              # http://localhost:5173
 
 ## Deployment
 
-- **Backend (Render):** New Web Service -> root directory `backend`, build `npm install`, start `npm start`. Add the env variables above (`MONGODB_URI` from Atlas, `CLIENT_URL` = the frontend URL).
-- **Frontend (Netlify / Vercel):** root directory `frontend`, build `npm run build`, publish `dist`. Set `VITE_API_URL` to the Render URL + `/api`. `public/_redirects` (Netlify) and `vercel.json` handle SPA routing so deep links like `/tasks/123` work on refresh.
+Both apps can be deployed from the same repo as two separate projects.
+
+**Option A - everything on Vercel**
+
+1. Backend: New Project -> import the repo -> Root Directory `backend`, Framework Preset `Other`. Add env variables `MONGODB_URI`, `CLIENT_URL` (frontend URL, can be added after step 2) and `APP_TIMEZONE`. `backend/api/index.js` is the serverless entry and `backend/vercel.json` sends every path to it, so the API is at `https://<backend>.vercel.app/api/...`.
+2. Frontend: New Project -> same repo -> Root Directory `frontend`, Framework Preset `Vite`. Add `VITE_API_URL=https://<backend>.vercel.app/api`.
+3. Put the frontend URL in the backend `CLIENT_URL` and redeploy the backend.
+
+**Option B - backend on Render**
+
+Web Service -> root directory `backend`, build `npm install`, start `npm start`, same env variables. Frontend on Vercel/Netlify as above (`public/_redirects` covers Netlify).
+
+In MongoDB Atlas, Network Access must allow `0.0.0.0/0` because Vercel/Render don't have fixed IPs.
 
 ## API overview
 
